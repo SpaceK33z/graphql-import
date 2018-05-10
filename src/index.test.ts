@@ -210,6 +210,26 @@ type C2 {
   t.is(importSchema(schemaA, schemas), expectedSDL)
 })
 
+test('importSchema: asdf', t => {
+  const schemaB = `
+    type B {
+      hello: String!
+    }`
+
+  const expectedSDL = `\
+type A {
+  first: String
+  second: Float
+  b: B
+}
+
+type B {
+  hello: String!
+}
+`
+  t.is(importSchema('fixtures/object-path/a.graphql', { schemaB }), expectedSDL)
+})
+
 test(`importSchema: single object schema`, t => {
   const schemaA = `
     type A {
